@@ -1,0 +1,6 @@
+#Download all RefSeq genomes:
+
+
+wget ftp://ftp.ncbi.nih.gov/genomes/refseq/bacteria/assembly_summary.txt
+awk -F '\t' '{if($12=="Complete Genome") print $20}' assembly_summary.txt > assembly_summary_complete_genomes.txt
+for next in $(cat assembly_summary_complete_genomes.txt); do wget -P references "$next"/*genomic.fna.gz; done
